@@ -1,0 +1,18 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@android:color/holo_blue_light</item>
+        <item name="colorPrimaryDark">@android:color/holo_blue_light</item>
+        <item name="colorAccent">@android:color/holo_blue_light</item>
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+    <style name="xloading_padding_style">
+        <item name="android:paddingTop">@dimen/xframe_spacing</item>
+        <item name="android:paddingBottom">@dimen/xframe_spacing</item>
+        <item name="android:paddingLeft">@dimen/xframe_spacing_large</item>
+        <item name="android:paddingRight">@dimen/xframe_spacing_large</item>
+    </style>
+
+</resources>
