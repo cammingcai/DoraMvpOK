@@ -8,6 +8,7 @@ import mvp.gz.com.mvp.mvp.main.MainModel;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -19,6 +20,19 @@ import retrofit2.http.Query;
  * @ Body(POST请求):可以指定一个对象作为HTTP请求体
  * @ Field(POST请求):用于传送表单数据：开头必须多加上@FormUrlEncoded这句注释
  * @ Header/@Headers(POST请求):用于添加请求头部
+ *
+ *
+ //    @Headers(MvpStores.API_SERVER_URL)
+ //    @GET("user")
+ //    Call<WetherBean> getUser();
+ //@GET("user")
+ //Call<User> getUser(@Header("Authorization") String authorization)
+ //@FormUrlEncoded
+ //@POST("user/edit")
+ //Call<User> updateUser(@Field("first_name") String first, @Field("last_name") String last);
+ //@POST("users/new")
+ //Call<User> createUser(@Body User user);
+
  *
  */
 public interface MvpStores {
