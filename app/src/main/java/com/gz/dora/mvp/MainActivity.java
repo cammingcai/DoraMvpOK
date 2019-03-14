@@ -1,18 +1,15 @@
 package com.gz.dora.mvp;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import butterknife.BindView;
-import mvp.gz.com.mvp.MvpTest;
-import mvp.gz.com.mvp.mvp.main.MainModel;
+import mvp.gz.com.mvp.bean.WetherBean;
 import mvp.gz.com.mvp.mvp.main.MainPresenter;
 import mvp.gz.com.mvp.mvp.main.MainView;
 import mvp.gz.com.mvp.ui.MvpActivity;
 
-public class MainActivity extends MvpActivity<MainPresenter> implements MainView<MainModel> {
+public class MainActivity extends MvpActivity<MainPresenter> implements MainView<WetherBean> {
 
 //    @BindView(R.id.text)
     TextView text;
@@ -26,6 +23,14 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     @Override
     protected void initView() {
         text = findViewById(R.id.text);
+
+        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mvpPresenter.queryWether("b9a05b741d04063963bd964e8d79d06c",
+                        "301","2019-03-11");
+            }
+        });
     }
 
     @Override
@@ -45,10 +50,12 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
 
     @Override
-    public void getDataSuccess(MainModel model) {
-        Log.i("MainActivity","MainModel="+model.getWeatherinfo().getCity());
+    public void getDataSuccess(WetherBean model) {
+      //  Log.i("MainActivity","MainModel="+model.getWeatherinfo().getCity());
     //    ToastUtils.show(this,model.getWeatherinfo().getCity());
-        text.setText(model.getWeatherinfo().getCity());
+        text.setText(model.getResult().getCity_name()+model.getResult().getDay_weather()+
+                model.getResult().getDay_temp()+model.getResult().getDay_weather_id()+
+                model.getResult().getNight_wind_comp()+model.getResult().getDay_weather());
     }
 
     @Override
@@ -57,19 +64,5 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     }
 
 
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.button1:
-//                XLoadingView xLoadingView =   XLoadingView.wrap(this);
-//                xLoadingView.showEmpty();
-                MvpTest mvpTest = new MvpTest();
-                mvpTest.startData();
-                break;
-            case R.id.button2:
-                //请求接口
-                mvpPresenter.loadDataByRetrofitRxjava("101310222");
-                break;
-        }
-    }
 
 }

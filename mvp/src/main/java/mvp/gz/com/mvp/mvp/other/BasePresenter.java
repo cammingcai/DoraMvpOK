@@ -37,7 +37,6 @@ public class BasePresenter<V> {
         }
     }
 
-
     public void addSubscription(Observable observable, DisposableObserver observer) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
@@ -45,6 +44,8 @@ public class BasePresenter<V> {
 
         mCompositeDisposable.add(observer);
 
+        // Schedulers.io() I/O 操作（读写文件、数据库、网络请求等）
+        // AndroidSchedulers.mainThread() RxJava 扩展的 Android 主线程
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(observer);

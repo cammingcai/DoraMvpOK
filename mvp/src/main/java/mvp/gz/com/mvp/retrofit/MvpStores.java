@@ -3,6 +3,7 @@ package mvp.gz.com.mvp.retrofit;
 import io.reactivex.Observable;
 import mvp.gz.com.mvp.bean.GradesModel;
 import mvp.gz.com.mvp.bean.LoginModel;
+import mvp.gz.com.mvp.bean.WetherBean;
 import mvp.gz.com.mvp.mvp.main.MainModel;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -22,7 +23,7 @@ import retrofit2.http.Query;
  */
 public interface MvpStores {
     //baseUrl
-    String API_SERVER_URL = "http://www.weather.com.cn/";
+    String API_SERVER_URL = "http://v.juhe.cn/";
 //    String API_SERVER_URL = "http://120.78.121.247:8090/";
 
     //加载天气
@@ -40,5 +41,10 @@ public interface MvpStores {
     Observable<LoginModel> login(@Query("phone") String phone, @Query("wordpass") String wordpass);
 //    @POST("api/user/shiroLogin")
 //    Observable<LoginModel> login(@Field("phone") String phone, @Field("wordpass") String wordpass);
+
+
+    @GET("historyWeather/weather")
+    Observable<WetherBean> queryWether(@Query("key") String key, @Query("city_id") String city_id
+    , @Query("weather_date") String weather_date);
 
 }
