@@ -1,7 +1,7 @@
 package mvp.gz.com.mvp;
 
 
-import mvp.gz.com.mvp.mvp.other.BasePresenter;
+import mvp.gz.com.mvp.mvp.main.BasePresenter;
 
 /**
 

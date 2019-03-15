@@ -33,6 +33,10 @@ import retrofit2.http.Query;
  //@POST("users/new")
  //Call<User> createUser(@Body User user);
 
+ @GET("group/{id}/users")
+ Call<Book> groupList(@Path("id") int groupId);
+ @GET("book/search")
+ Call<Book> getSearchBook(@QueryMap Map<String, String> options);
  *
  */
 public interface MvpStores {

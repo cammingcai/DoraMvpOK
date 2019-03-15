@@ -2,7 +2,7 @@ package mvp.gz.com.mvp.ui;
 
 import android.os.Bundle;
 
-import mvp.gz.com.mvp.mvp.other.BasePresenter;
+import mvp.gz.com.mvp.mvp.main.BasePresenter;
 import mvp.gz.com.mvp.utils.ProgressDialog;
 
 
