@@ -57,8 +57,6 @@ public interface MvpStores {
 
     @POST("api/user/shiroLogin")
     Observable<LoginModel> login(@Query("phone") String phone, @Query("wordpass") String wordpass);
-//    @POST("api/user/shiroLogin")
-//    Observable<LoginModel> login(@Field("phone") String phone, @Field("wordpass") String wordpass);
 
 
     @GET("historyWeather/weather")

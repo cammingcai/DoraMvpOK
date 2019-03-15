@@ -4,8 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+<!--    <include layout="@layout/toolbar" />-->
 
+    <EditText
+        android:id="@+id/et_city_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入城市ID"/>
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"

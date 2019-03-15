@@ -35,6 +35,15 @@ public class WetherBean {
         this.error_code = error_code;
     }
 
+    @Override
+    public String toString() {
+        return "WetherBean{" +
+                "reason='" + reason + '\'' +
+                "\n, result=" + result +
+                "\n, error_code=" + error_code +
+                '}';
+    }
+
     public class Result {
 
         private String city_id;
@@ -141,5 +150,23 @@ public class WetherBean {
             return night_weather_id;
         }
 
+        @Override
+        public String toString() {
+            return "Result{ " +
+                    "\n city_id='" + city_id + '\'' +
+                    ",\n city_name='" + city_name + '\'' +
+                    ", \n weather_date='" + weather_date + '\'' +
+                    ", \n day_weather='" + day_weather + '\'' +
+                    ", \n night_weather='" + night_weather + '\'' +
+                    ", \n day_temp='" + day_temp + '\'' +
+                    ", \n night_temp='" + night_temp + '\'' +
+                    ", \n day_wind='" + day_wind + '\'' +
+                    ", \n day_wind_comp='" + day_wind_comp + '\'' +
+                    ", \n night_wind='" + night_wind + '\'' +
+                    ", \n night_wind_comp='" + night_wind_comp + '\'' +
+                    ", \n day_weather_id='" + day_weather_id + '\'' +
+                    ", \n night_weather_id='" + night_weather_id + '\'' +
+                    '}';
+        }
     }
 }

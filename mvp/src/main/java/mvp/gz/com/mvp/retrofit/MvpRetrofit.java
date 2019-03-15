@@ -12,10 +12,26 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
 
  */
-public class MvpClient {
-    public static Retrofit mRetrofit;
+public class MvpRetrofit {
+    private static MvpRetrofit instance;
+    private static Retrofit  mRetrofit;
 
-    public static Retrofit retrofit() {
+    private MvpStores mvpStores;
+    public static MvpRetrofit getInstance(){
+        if(instance==null){
+            synchronized (MvpRetrofit.class){
+                if(instance==null){
+                    instance = new MvpRetrofit();
+                }
+            }
+        }
+        return instance;
+    }
+    public MvpRetrofit(){
+        retrofit();
+    }
+
+    private  Retrofit retrofit() {
         if (mRetrofit == null) {
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
@@ -34,8 +50,18 @@ public class MvpClient {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(okHttpClient)
                     .build();
+
+
         }
+
         return mRetrofit;
+    }
+
+    public MvpStores getMvpApi(){
+
+        if(mvpStores==null)
+            mvpStores = mRetrofit.create(MvpStores.class);
+        return  mvpStores;
     }
 
 }

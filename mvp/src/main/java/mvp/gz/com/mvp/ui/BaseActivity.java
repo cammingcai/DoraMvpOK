@@ -15,7 +15,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import mvp.gz.com.mvp.retrofit.MvpClient;
+import mvp.gz.com.mvp.retrofit.MvpRetrofit;
 import mvp.gz.com.mvp.retrofit.MvpStores;
 import retrofit2.Call;
 
@@ -49,50 +49,50 @@ public abstract class BaseActivity extends XActivity {
 
     @Override
     protected void onDestroy() {
-        callCancel();
+       // callCancel();
         onUnsubscribe();
         super.onDestroy();
     }
+//
+//    public MvpStores apiStores() {
+//        return MvpRetrofit.retrofit().create(MvpStores.class);
+//    }
+//
+//    public void addCalls(Call call) {
+//        if (calls == null) {
+//            calls = new ArrayList<>();
+//        }
+//        calls.add(call);
+//    }
+//
+//    private void callCancel() {
+//        if (calls != null && calls.size() > 0) {
+//            for (Call call : calls) {
+//                if (!call.isCanceled())
+//                    call.cancel();
+//            }
+//            calls.clear();
+//        }
+//    }
 
-    public MvpStores apiStores() {
-        return MvpClient.retrofit().create(MvpStores.class);
-    }
-
-    public void addCalls(Call call) {
-        if (calls == null) {
-            calls = new ArrayList<>();
-        }
-        calls.add(call);
-    }
-
-    private void callCancel() {
-        if (calls != null && calls.size() > 0) {
-            for (Call call : calls) {
-                if (!call.isCanceled())
-                    call.cancel();
-            }
-            calls.clear();
-        }
-    }
-
-
-    public <T> void addSubscription(Observable<T> observable, DisposableObserver<T> observer) {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
-        mCompositeDisposable.add(observer);
-
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-    }
-
-    public void addSubscription(Disposable disposable) {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
-        mCompositeDisposable.add(disposable);
-    }
+//
+//    public <T> void addSubscription(Observable<T> observable, DisposableObserver<T> observer) {
+//        if (mCompositeDisposable == null) {
+//            mCompositeDisposable = new CompositeDisposable();
+//        }
+//        mCompositeDisposable.add(observer);
+//
+//        observable.subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(observer);
+//    }
+//
+//    public void addSubscription(Disposable disposable) {
+//        if (mCompositeDisposable == null) {
+//            mCompositeDisposable = new CompositeDisposable();
+//        }
+//        mCompositeDisposable.add(disposable);
+//    }
 
     public void onUnsubscribe() {
         //取消注册，以避免内存泄露

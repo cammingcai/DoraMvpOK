@@ -16,7 +16,7 @@ public class MvpTest extends Mvp<MainPresenter> implements MainView<MainModel> {
 
     public void  startData(){
         mvpPresenter = createPresenter();
-        mvpPresenter.loadDataByRetrofitRxjava("101310222");
+//        mvpPresenter.loadDataByRetrofitRxjava("101310222");
        // mvpPresenter.queryGrades("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6IjEzNTg4ODg4ODg4IiwiZXhwIjoxNTUzOTk4OTY0fQ.Nb3ptdr_c67HT9a-0iaUjVJr_HUBDs99-jHNzht1wBk");
     }
     @Override
@@ -29,11 +29,16 @@ public class MvpTest extends Mvp<MainPresenter> implements MainView<MainModel> {
 
     @Override
     public void getDataSuccess(MainModel model) {
-        Log.i("MvpTest","model="+model.getWeatherinfo().getCity());
+       // Log.i("MvpTest","model="+model.getWeatherinfo().getCity());
     }
 
     @Override
     public void getDataFail(String msg) {
+
+    }
+
+    @Override
+    public void showErrorMessage() {
 
     }
 }
