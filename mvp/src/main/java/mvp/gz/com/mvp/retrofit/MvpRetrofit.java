@@ -10,18 +10,20 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
-
+ *
  */
 public class MvpRetrofit {
     private static MvpRetrofit instance;
-    private static Retrofit  mRetrofit;
+    private Retrofit  mRetrofit;
 
-    private MvpStores mvpStores;
+    private MvpApi mvpStores;
     public static MvpRetrofit getInstance(){
         if(instance==null){
             synchronized (MvpRetrofit.class){
                 if(instance==null){
-                    instance = new MvpRetrofit();
+                    synchronized (MvpRetrofit.class){
+                        instance = new MvpRetrofit();
+                    }
                 }
             }
         }
@@ -45,7 +47,9 @@ public class MvpRetrofit {
 
             OkHttpClient okHttpClient = builder.build();
             mRetrofit = new Retrofit.Builder()
-                    .baseUrl(MvpStores.API_SERVER_URL)
+                    //设置网络请求的Url地址
+                    .baseUrl(MvpApi.API_SERVER_URL)
+                    //设置数据解析器
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(okHttpClient)
@@ -57,10 +61,11 @@ public class MvpRetrofit {
         return mRetrofit;
     }
 
-    public MvpStores getMvpApi(){
+    public MvpApi getMvpApi(){
 
         if(mvpStores==null)
-            mvpStores = mRetrofit.create(MvpStores.class);
+            // 创建网络请求接口的实例
+            mvpStores = mRetrofit.create(MvpApi.class);
         return  mvpStores;
     }
 

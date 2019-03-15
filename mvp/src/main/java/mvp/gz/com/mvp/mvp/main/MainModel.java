@@ -12,6 +12,6 @@ public class MainModel implements BaseModel {
 
     public Observable<WetherBean> queryWether(String key, String cityid,String date){
         return MvpRetrofit.getInstance().getMvpApi().queryWether(key,cityid,date);
-    };
+    }
 
 }

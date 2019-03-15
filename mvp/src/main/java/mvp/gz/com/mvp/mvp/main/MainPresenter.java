@@ -1,8 +1,6 @@
 package mvp.gz.com.mvp.mvp.main;
 
 
-import mvp.gz.com.mvp.bean.GradesModel;
-import mvp.gz.com.mvp.bean.LoginModel;
 import mvp.gz.com.mvp.bean.WetherBean;
 import mvp.gz.com.mvp.retrofit.MvpCallback;
 
@@ -43,5 +41,7 @@ public class MainPresenter extends BasePresenter<MainView> {
                     }
 
                 });
+
+
     }
 }

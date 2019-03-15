@@ -5,18 +5,9 @@ import android.support.annotation.LayoutRes;
 import android.view.View;
 import android.view.ViewGroup;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
-import mvp.gz.com.mvp.retrofit.MvpRetrofit;
-import mvp.gz.com.mvp.retrofit.MvpStores;
 import retrofit2.Call;
 
 /**
@@ -24,8 +15,8 @@ import retrofit2.Call;
  */
 public abstract class BaseActivity extends XActivity {
     public Activity mActivity;
-    private CompositeDisposable mCompositeDisposable;
-    private List<Call> calls;
+//    private CompositeDisposable mCompositeDisposable;
+//    private List<Call> calls;
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
@@ -50,7 +41,7 @@ public abstract class BaseActivity extends XActivity {
     @Override
     protected void onDestroy() {
        // callCancel();
-        onUnsubscribe();
+//        onUnsubscribe();
         super.onDestroy();
     }
 //
@@ -94,11 +85,11 @@ public abstract class BaseActivity extends XActivity {
 //        mCompositeDisposable.add(disposable);
 //    }
 
-    public void onUnsubscribe() {
-        //取消注册，以避免内存泄露
-        if (mCompositeDisposable != null)
-            mCompositeDisposable.dispose();
-    }
+//    public void onUnsubscribe() {
+//        //取消注册，以避免内存泄露
+//        if (mCompositeDisposable != null)
+//            mCompositeDisposable.dispose();
+//    }
 
 //    public Toolbar initToolBar(String title) {
 //

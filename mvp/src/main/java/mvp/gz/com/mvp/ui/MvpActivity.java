@@ -27,15 +27,13 @@ public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity 
             mvpPresenter.detachView();
         }
     }
-
     public void showLoading(String msg) {
-        //showProgressDialog();
         ProgressDialog.getInstance().show(this,msg);
     }
     public void hideLoading() {
         ProgressDialog.getInstance().dismiss();
-        //  dismissProgressDialog();
     }
+
 }
 
 
