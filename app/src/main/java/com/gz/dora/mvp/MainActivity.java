@@ -7,10 +7,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import mvp.gz.com.mvp.bean.WetherBean;
-import mvp.gz.com.mvp.mvp1.MainPresenter;
-import mvp.gz.com.mvp.mvp1.MainView;
-import mvp.gz.com.mvp.ui.MvpActivity;
+import com.gz.camming.mvp.bean.WetherBean;
+import com.gz.camming.mvp.mvp.MainPresenter;
+import com.gz.camming.mvp.mvp.MainView;
+import com.gz.camming.mvp.ui.MvpActivity;
 
 public class MainActivity extends MvpActivity<MainPresenter> implements MainView<WetherBean> {
 
