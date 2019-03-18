@@ -1,4 +1,4 @@
-package mvp.gz.com.mvp.retrofit;
+package mvp.gz.com.mvp.mvp1.retrofit;
 
 import retrofit2.Call;
 import retrofit2.Callback;

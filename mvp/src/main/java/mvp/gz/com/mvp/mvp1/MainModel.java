@@ -1,8 +1,8 @@
-package mvp.gz.com.mvp.mvp.main;
+package mvp.gz.com.mvp.mvp1;
 
 import io.reactivex.Observable;
 import mvp.gz.com.mvp.bean.WetherBean;
-import mvp.gz.com.mvp.retrofit.MvpRetrofit;
+import mvp.gz.com.mvp.mvp1.retrofit.MvpRetrofit;
 
 /**
  *  Model接口 创建对应的联网请求的方法
@@ -10,6 +10,7 @@ import mvp.gz.com.mvp.retrofit.MvpRetrofit;
  */
 public class MainModel implements BaseModel {
 
+    //查询天气 测试
     public Observable<WetherBean> queryWether(String key, String cityid,String date){
         return MvpRetrofit.getInstance().getMvpApi().queryWether(key,cityid,date);
     }

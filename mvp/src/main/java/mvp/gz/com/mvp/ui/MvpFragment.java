@@ -4,7 +4,7 @@ package mvp.gz.com.mvp.ui;
 import android.os.Bundle;
 import android.view.View;
 
-import mvp.gz.com.mvp.mvp.main.BasePresenter;
+import mvp.gz.com.mvp.mvp1.BasePresenter;
 import mvp.gz.com.mvp.ui.fragment.BaseFragment;
 
 

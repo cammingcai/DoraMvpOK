@@ -1,8 +1,8 @@
-package mvp.gz.com.mvp.mvp.main;
+package mvp.gz.com.mvp.mvp1;
 
 
 import mvp.gz.com.mvp.bean.WetherBean;
-import mvp.gz.com.mvp.retrofit.MvpCallback;
+import mvp.gz.com.mvp.mvp1.retrofit.MvpCallback;
 
 /**
  * Presenter类是具体的逻辑业务处理类，该

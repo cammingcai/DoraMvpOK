@@ -1,11 +1,8 @@
 package mvp.gz.com.mvp;
 
-import android.util.Log;
-
-import mvp.gz.com.mvp.mvp.main.MainModel;
-import mvp.gz.com.mvp.mvp.main.MainPresenter;
-import mvp.gz.com.mvp.mvp.main.MainView;
-import mvp.gz.com.mvp.ui.MvpActivity;
+import mvp.gz.com.mvp.mvp1.MainModel;
+import mvp.gz.com.mvp.mvp1.MainPresenter;
+import mvp.gz.com.mvp.mvp1.MainView;
 
 
 /**

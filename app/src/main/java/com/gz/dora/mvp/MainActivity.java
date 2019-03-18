@@ -8,8 +8,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import mvp.gz.com.mvp.bean.WetherBean;
-import mvp.gz.com.mvp.mvp.main.MainPresenter;
-import mvp.gz.com.mvp.mvp.main.MainView;
+import mvp.gz.com.mvp.mvp1.MainPresenter;
+import mvp.gz.com.mvp.mvp1.MainView;
 import mvp.gz.com.mvp.ui.MvpActivity;
 
 public class MainActivity extends MvpActivity<MainPresenter> implements MainView<WetherBean> {
