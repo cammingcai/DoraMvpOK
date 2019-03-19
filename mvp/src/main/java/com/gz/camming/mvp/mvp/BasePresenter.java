@@ -45,18 +45,19 @@ public class BasePresenter<V> {
 
 
 
-
-    public void addSubscription(Observable observable, DisposableObserver observer) {
+    //RxJava 开始注册
+    //public void addSubscription(Observable observable, DisposableObserver observer) {
+    public void requestData(Observable observable, DisposableObserver observer) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
         }
 
         mCompositeDisposable.add(observer);
 
-        // Schedulers.io() I/O 操作（读写文件、数据库、网络请求等）
+        // Schedulers.io() I/O 操作（读写文件、数据库、网络请求等）  请求数据在IO线程
         // AndroidSchedulers.mainThread() RxJava 扩展的 Android 主线程
         observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())//请求完成后再主线程更新UI
                 .subscribeWith(observer);
     }
 }

@@ -16,16 +16,23 @@ public class MainPresenter extends BasePresenter<MainView> {
         model = new MainModel();
     }
 
+    private boolean isMvpView(){
+        return mvpView==null;
+    }
 
     /**
      * 查询天气
      * */
     public void queryWether(String key,String cityid,String date) {
+        if(isMvpView()){
+            throw new RuntimeException("not  mvp view");
+        }
         mvpView.showLoading("加载中");
-        addSubscription(model.queryWether(key,cityid,date),
+        requestData(model.queryWether(key,cityid,date),
                 new MvpCallback<WetherBean>() {
                     @Override
                     public void onSuccess(WetherBean model) {
+
                         mvpView.getDataSuccess(model);
                     }
 
