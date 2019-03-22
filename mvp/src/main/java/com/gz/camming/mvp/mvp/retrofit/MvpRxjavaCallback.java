@@ -10,7 +10,7 @@ import retrofit2.HttpException;
 /**
 
  */
-public abstract class MvpCallback<M> extends DisposableObserver<M> {
+public abstract class MvpRxjavaCallback<M> extends DisposableObserver<M> {
 
 
 //    private Handler handler = new Handler();

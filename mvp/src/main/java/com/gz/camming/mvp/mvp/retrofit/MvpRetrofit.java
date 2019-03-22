@@ -5,7 +5,6 @@ package com.gz.camming.mvp.mvp.retrofit;
 import com.gz.camming.mvp.BuildConfig;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -18,7 +17,7 @@ public class MvpRetrofit {
     private static MvpRetrofit instance;
     private Retrofit  mRetrofit;
 
-    private MvpApi mvpStores;
+    private MvpApi mMvpApi;
     public static MvpRetrofit getInstance(){
         if(instance==null){
             synchronized (MvpRetrofit.class){
@@ -46,8 +45,8 @@ public class MvpRetrofit {
 //                //设置 Debug Log 模式
 //                builder.addInterceptor(loggingInterceptor);
 //            }
-//
 //            OkHttpClient okHttpClient = builder.build();
+
             OkHttpClient okHttpClient = new OkHttpClient();
             mRetrofit = new Retrofit.Builder()
                     //设置网络请求的Url地址
@@ -69,10 +68,10 @@ public class MvpRetrofit {
      * */
     public MvpApi getMvpApi(){
 
-        if(mvpStores==null)
+        if(mMvpApi==null)
             // 创建网络请求接口的实例
-            mvpStores = mRetrofit.create(MvpApi.class);
-        return  mvpStores;
+            mMvpApi = mRetrofit.create(MvpApi.class);
+        return  mMvpApi;
     }
 
 }

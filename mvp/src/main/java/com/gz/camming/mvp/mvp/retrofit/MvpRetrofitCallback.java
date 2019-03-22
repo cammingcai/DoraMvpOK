@@ -8,7 +8,7 @@ import retrofit2.Response;
 
  */
 
-public abstract class RetrofitCallback<M> implements Callback<M> {
+public abstract class MvpRetrofitCallback<M> implements Callback<M> {
 
     public abstract void onSuccess(M model);
 

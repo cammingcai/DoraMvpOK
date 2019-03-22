@@ -7,12 +7,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gz.camming.mvp.bean.WetherBean;
+import com.gz.camming.mvp.bean.AibBean;
 import com.gz.camming.mvp.mvp.MainPresenter;
 import com.gz.camming.mvp.mvp.MainView;
 import com.gz.camming.mvp.ui.MvpActivity;
 
-public class MainActivity extends MvpActivity<MainPresenter> implements MainView<WetherBean> {
+public class MainActivity extends MvpActivity<MainPresenter> implements MainView<AibBean> {
 
 //    @BindView(R.id.text)
     TextView text;
@@ -38,8 +38,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                     Toast.makeText(MainActivity.this,"请输入城市ID",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                mvpPresenter.queryWether("b9a05b741d04063963bd964e8d79d06c",
-                        cityId,"2019-03-11");
+                mvpPresenter.queryAib("haaaaaaaaaaa",17);
             }
         });
     }
@@ -61,7 +60,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
 
     @Override
-    public void getDataSuccess(WetherBean model) {
+    public void getDataSuccess(AibBean model) {
 
         text.setText(model.toString());
     //    text.setText(model.toString()+model.getResult().toString());

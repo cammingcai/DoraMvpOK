@@ -5,7 +5,7 @@ package com.gz.camming.mvp.bean;
  * code is data ,data is code
  */
 
-public class WetherBean implements Bean{
+public class WetherBean {
 
     private String reason;
     private Result result;

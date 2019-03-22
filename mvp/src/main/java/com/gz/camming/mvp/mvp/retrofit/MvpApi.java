@@ -1,6 +1,8 @@
 package com.gz.camming.mvp.mvp.retrofit;
 
 import io.reactivex.Observable;
+
+import com.gz.camming.mvp.bean.AibBean;
 import com.gz.camming.mvp.bean.WetherBean;
 import com.gz.camming.mvp.mvp.MainModel;
 import okhttp3.ResponseBody;
@@ -40,7 +42,7 @@ import retrofit2.http.Url;
  */
 public interface MvpApi {
     //baseUrl
-    String API_SERVER_URL = "http://v.juhe.cn/";
+    String API_SERVER_URL = "http://127.0.0.1:8080/";
 //    String API_SERVER_URL = "http://120.78.121.247:8090/";
 
     //加载天气
@@ -52,7 +54,9 @@ public interface MvpApi {
     @GET("adat/sk/{cityId}.html")
     Observable<MainModel> loadDataByRetrofitRxJava(@Path("cityId") String cityId);
 
-
+    @GET("erhuowei/")
+    Observable<AibBean> getAibData(@Query("name") String name, @Query("age") int age
+    ,@Query("address") String address,@Query("aib") String aib);
 
     @GET("historyWeather/weather")
     Observable<WetherBean> queryWether(@Query("key") String key, @Query("city_id") String city_id

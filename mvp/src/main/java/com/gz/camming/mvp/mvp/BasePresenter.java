@@ -47,7 +47,7 @@ public class BasePresenter<V> {
 
     //RxJava 开始注册
     //public void addSubscription(Observable observable, DisposableObserver observer) {
-    public void requestData(Observable observable, DisposableObserver observer) {
+    public void requestDataSubscription(Observable observable, DisposableObserver observer) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
         }

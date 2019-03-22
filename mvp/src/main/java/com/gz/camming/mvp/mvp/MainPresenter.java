@@ -1,8 +1,9 @@
 package com.gz.camming.mvp.mvp;
 
 
+import com.gz.camming.mvp.bean.AibBean;
 import com.gz.camming.mvp.bean.WetherBean;
-import com.gz.camming.mvp.mvp.retrofit.MvpCallback;
+import com.gz.camming.mvp.mvp.retrofit.MvpRxjavaCallback;
 
 /**
  * Presenter类是具体的逻辑业务处理类，该
@@ -17,19 +18,19 @@ public class MainPresenter extends BasePresenter<MainView> {
     }
 
     private boolean isMvpView(){
-        return mvpView==null;
+        return mvpView!=null;
     }
 
     /**
      * 查询天气
      * */
     public void queryWether(String key,String cityid,String date) {
-        if(isMvpView()){
+        if(!isMvpView()){
             throw new RuntimeException("not  mvp view");
         }
         mvpView.showLoading("加载中");
-        requestData(model.queryWether(key,cityid,date),
-                new MvpCallback<WetherBean>() {
+        requestDataSubscription(model.queryWether(key,cityid,date),
+                new MvpRxjavaCallback<WetherBean>() {
                     @Override
                     public void onSuccess(WetherBean model) {
 
@@ -49,6 +50,37 @@ public class MainPresenter extends BasePresenter<MainView> {
 
                 });
 
+    }
+
+
+    /**
+     * 查询天气
+     * */
+    public void queryAib(String name,int age) {
+        if(!isMvpView()){
+            throw new RuntimeException("not  mvp view");
+        }
+        mvpView.showLoading("加载中");
+        requestDataSubscription(model.queryAib(name,age,"aaaa","bbbbb"),
+                new MvpRxjavaCallback<AibBean>() {
+                    @Override
+                    public void onSuccess(AibBean model) {
+
+                        mvpView.getDataSuccess(model);
+                    }
+
+                    @Override
+                    public void onFailure(String msg) {
+                        mvpView.getDataFail(msg);
+                    }
+
+
+                    @Override
+                    public void onFinish() {
+                        mvpView.hideLoading();
+                    }
+
+                });
 
     }
 }

@@ -2,27 +2,27 @@ package com.gz.camming.mvp.iml;
 
 /**
  *
- * bindService call back
+ *
  */
 public interface UpdateProgressListener {
     /**
-     * download start
+     * 开始下载
      */
      void start();
 
     /**
-     * update download progress
+     * 更新下载进度
      * @param progress
      */
      void update(int progress);
 
     /**
-     * download success
+     * 下载成功
      */
      void success();
 
     /**
-     * download error
+     * 下载错误
      */
      void error();
 }
