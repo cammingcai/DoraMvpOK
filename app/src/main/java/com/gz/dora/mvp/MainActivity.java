@@ -11,6 +11,7 @@ import com.gz.camming.mvp.bean.AibBean;
 import com.gz.camming.mvp.mvp.MainPresenter;
 import com.gz.camming.mvp.mvp.MainView;
 import com.gz.camming.mvp.ui.MvpActivity;
+import com.gz.camming.mvp.ui.view.loadingview.XLoadingView;
 
 public class MainActivity extends MvpActivity<MainPresenter> implements MainView<AibBean> {
 
@@ -19,10 +20,12 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
     EditText cityEt;
 
+    XLoadingView xLoadingView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        xLoadingView = XLoadingView.wrap(this);
+        xLoadingView.showLoading();
     }
 
     @Override
