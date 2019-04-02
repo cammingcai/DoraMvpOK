@@ -32,6 +32,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
     implementation "com.afollestad.material-dialogs:core:$dialogVersion"
+    implementation 'com.squareup.retrofit2:converter-scalars:2.0.0'
     //view注解
     compile "com.jakewharton:butterknife:$butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"

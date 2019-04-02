@@ -10,6 +10,7 @@ import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  *
@@ -52,7 +53,8 @@ public class MvpRetrofit {
                     //设置网络请求的Url地址
                     .baseUrl(MvpApi.API_SERVER_URL)
                     //设置数据解析器
-                    .addConverterFactory(GsonConverterFactory.create())
+//                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(ScalarsConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(okHttpClient)
                     .build();
@@ -68,6 +70,7 @@ public class MvpRetrofit {
      * 获取网络请求接口实例
      * */
     public MvpApi getMvpApi(){
+
 
         if(mMvpApi==null)
             // 创建网络请求接口的实例

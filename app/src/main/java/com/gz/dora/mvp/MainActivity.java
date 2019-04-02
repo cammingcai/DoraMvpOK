@@ -2,18 +2,20 @@ package com.gz.dora.mvp;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gz.camming.mvp.bean.AibBean;
+import com.gz.camming.mvp.bean.LoginBean;
 import com.gz.camming.mvp.mvp.MainPresenter;
 import com.gz.camming.mvp.mvp.MainView;
 import com.gz.camming.mvp.ui.MvpActivity;
 import com.gz.camming.mvp.ui.view.loadingview.XLoadingView;
 
-public class MainActivity extends MvpActivity<MainPresenter> implements MainView<AibBean> {
+public class MainActivity extends MvpActivity<MainPresenter> implements MainView<LoginBean> {
 
 //    @BindView(R.id.text)
     TextView text;
@@ -25,7 +27,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         xLoadingView = XLoadingView.wrap(this);
-        xLoadingView.showLoading();
+//        xLoadingView.showLoading();
     }
 
     @Override
@@ -36,12 +38,12 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String cityId = cityEt.getText().toString();
-                if(TextUtils.isEmpty(cityId)){
-                    Toast.makeText(MainActivity.this,"请输入城市ID",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                mvpPresenter.queryAib("haaaaaaaaaaa",17);
+//                String cityId = cityEt.getText().toString();
+//                if(TextUtils.isEmpty(cityId)){
+//                    Toast.makeText(MainActivity.this,"请输入城市ID",Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+                mvpPresenter.login("13560048370","123456");
             }
         });
     }
@@ -63,8 +65,9 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
 
     @Override
-    public void getDataSuccess(AibBean model) {
+    public void getDataSuccess(LoginBean model) {
 
+        Log.i("MainActivity","model="+model);
         text.setText(model.toString());
     //    text.setText(model.toString()+model.getResult().toString());
     }

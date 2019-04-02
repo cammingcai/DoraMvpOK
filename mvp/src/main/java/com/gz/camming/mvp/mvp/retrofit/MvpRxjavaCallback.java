@@ -3,7 +3,16 @@ package com.gz.camming.mvp.mvp.retrofit;
 
 
 
+import android.util.Log;
+
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 import io.reactivex.observers.DisposableObserver;
+import okhttp3.ResponseBody;
 import retrofit2.HttpException;
 
 
@@ -30,7 +39,13 @@ public abstract class MvpRxjavaCallback<M> extends DisposableObserver<M> {
      */
     public abstract void onFinish();
 
+    @Override
+    public void onNext(M model) {
+        onSuccess(model);
+//        Log.i("MvpRxjavaCallback",model.toString());
+//        onSuccess(new Gson().<M>fromJson (model.toString(),getTClass(this.getClass() )));
 
+    }
     @Override
     public void onError(Throwable e) {
         e.printStackTrace();
@@ -53,29 +68,20 @@ public abstract class MvpRxjavaCallback<M> extends DisposableObserver<M> {
         }
         onFinish();
         onFailure(msg);
-//        final String finalMsg = msg;
-//        handler.post(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        });
-    }
-
-    @Override
-    public void onNext(final M model) {
-        onSuccess(model);
-//        handler.post(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        });
 
     }
+
+
 
     @Override
     public void onComplete() {
         onFinish();
+    }
+
+
+    public Class<?> getTClass(Object obj)
+    {
+        Class<?> tClass = (Class<?>)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        return tClass;
     }
 }

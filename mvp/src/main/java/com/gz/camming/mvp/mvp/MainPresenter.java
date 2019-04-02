@@ -2,8 +2,15 @@ package com.gz.camming.mvp.mvp;
 
 
 import com.gz.camming.mvp.bean.AibBean;
+import com.gz.camming.mvp.bean.LoginBean;
 import com.gz.camming.mvp.bean.WetherBean;
 import com.gz.camming.mvp.mvp.retrofit.MvpRxjavaCallback;
+
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * Presenter类是具体的逻辑业务处理类，该
@@ -21,18 +28,12 @@ public class MainPresenter extends BasePresenter<MainView> {
         return mvpView!=null;
     }
 
-    /**
-     * 查询天气
-     * */
-    public void queryWether(String key,String cityid,String date) {
-        if(!isMvpView()){
-            throw new RuntimeException("not  mvp view");
-        }
+    public void login(String phone,String pas){
         mvpView.showLoading("加载中");
-        requestDataSubscription(model.queryWether(key,cityid,date),
-                new MvpRxjavaCallback<WetherBean>() {
+        requestDataSubscription(model.login(phone,pas),
+                new MvpRxjavaCallback<String>() {
                     @Override
-                    public void onSuccess(WetherBean model) {
+                    public void onSuccess(String model) {
 
                         mvpView.getDataSuccess(model);
                     }
@@ -49,22 +50,30 @@ public class MainPresenter extends BasePresenter<MainView> {
                     }
 
                 });
-
     }
 
 
+
+
+
     /**
-     * 查询天气
+     * 上传头像
+     *
      * */
-    public void queryAib(String name,int age) {
+    public void uploadFile(String path) {
         if(!isMvpView()){
             throw new RuntimeException("not  mvp view");
         }
         mvpView.showLoading("加载中");
-        requestDataSubscription(model.queryAib(name,age,"aaaa","bbbbb"),
-                new MvpRxjavaCallback<AibBean>() {
+
+        File file = new File(path);
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part part = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
+        requestDataSubscription(model.uploadFile(requestBody,part),
+                new MvpRxjavaCallback<String>() {
                     @Override
-                    public void onSuccess(AibBean model) {
+                    public void onSuccess(String model) {
 
                         mvpView.getDataSuccess(model);
                     }

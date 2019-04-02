@@ -24,6 +24,7 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="sssssssssssss"
         android:layout_margin="10dp" />
 
 </LinearLayout>

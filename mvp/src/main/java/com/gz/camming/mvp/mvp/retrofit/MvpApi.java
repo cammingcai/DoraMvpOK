@@ -3,12 +3,21 @@ package com.gz.camming.mvp.mvp.retrofit;
 import io.reactivex.Observable;
 
 import com.gz.camming.mvp.bean.AibBean;
+import com.gz.camming.mvp.bean.LoginBean;
 import com.gz.camming.mvp.bean.WetherBean;
 import com.gz.camming.mvp.mvp.MainModel;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
@@ -42,8 +51,9 @@ import retrofit2.http.Url;
  */
 public interface MvpApi {
     //baseUrl
-    String API_SERVER_URL = "http://127.0.0.1:8080/";
-//    String API_SERVER_URL = "http://120.78.121.247:8090/";
+   // String API_SERVER_URL = "http://127.0.0.1:8080/";
+//    String API_SERVER_URL = "http://192.168.11.237:8181/";
+    String API_SERVER_URL = "http://120.78.121.247:8090/";
 
     //加载天气
     @Headers("apikey:81bf9da930c7f9825a3c3383f1d8d766")
@@ -54,18 +64,27 @@ public interface MvpApi {
     @GET("adat/sk/{cityId}.html")
     Observable<MainModel> loadDataByRetrofitRxJava(@Path("cityId") String cityId);
 
-    @GET("erhuowei/")
-    Observable<AibBean> getAibData(@Query("name") String name, @Query("age") int age
-    ,@Query("address") String address,@Query("aib") String aib);
+
 
     @GET("historyWeather/weather")
     Observable<WetherBean> queryWether(@Query("key") String key, @Query("city_id") String city_id
     , @Query("weather_date") String weather_date);
 
+//    @POST("api/user/login")
+//    Observable<LoginBean> login(@Query("phone") String phone,@Query("password") String password);
+
+//    @POST("api/user/shiroLogin")
+//    Observable<LoginBean> login(@Query("phone") String phone,@Query("wordpass") String password);
+
+    @POST("api/user/shiroLogin")
+    Observable<LoginBean> login(@Query("phone") String phone,@Query("wordpass") String password);
     //PDF文件Retrofit下载
     @Streaming
     @GET
     Observable<ResponseBody> retrofitDownloadFile(@Url String fileUrl);
 
+    @Multipart
+    @POST
+    Observable<String> retrofitUploadFile(@Part  RequestBody requestBody, @Part MultipartBody.Part file);
 
 }
