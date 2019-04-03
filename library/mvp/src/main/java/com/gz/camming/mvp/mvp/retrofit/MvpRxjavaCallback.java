@@ -1,18 +1,15 @@
 package com.gz.camming.mvp.mvp.retrofit;
 
 
-
-
-import android.util.Log;
-
-import com.google.gson.Gson;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 
 import io.reactivex.observers.DisposableObserver;
 import okhttp3.ResponseBody;
@@ -22,10 +19,11 @@ import retrofit2.HttpException;
 /**
 
  */
-public abstract class MvpRxjavaCallback extends DisposableObserver<String> {
+public abstract class MvpRxjavaCallback extends DisposableObserver<ResponseBody> {
 
 
 //    private Handler handler = new Handler();
+    public void onDownloadFile(ResponseBody body){};
     /**
      * 数据请求成功
      * @param model 请求到的数据
@@ -43,22 +41,22 @@ public abstract class MvpRxjavaCallback extends DisposableObserver<String> {
     public abstract void onFinish();
 
     @Override
-    public void onNext(String model) {
+    public void onNext(ResponseBody model) {
+        //onSuccess(model);
+        onDownloadFile(model);
         JSONObject json = null;
         try {
-            json = new JSONObject(model);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }finally {
+            json = new JSONObject(model.string());
             if(json!=null)
                 onSuccess(json.toString());
             else{
-                onSuccess(model);
+                onSuccess(model.string());
             }
+        }catch (IOException e){
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-//        onSuccess(model);
-//        Log.i("MvpRxjavaCallback",model.toString());
-//        onSuccess(new Gson().<M>fromJson (model.toString(),getTClass(this.getClass() )));
 
     }
     @Override
@@ -99,4 +97,6 @@ public abstract class MvpRxjavaCallback extends DisposableObserver<String> {
         Class<?> tClass = (Class<?>)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         return tClass;
     }
+
+
 }

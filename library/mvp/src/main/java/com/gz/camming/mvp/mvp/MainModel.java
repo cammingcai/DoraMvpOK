@@ -25,18 +25,21 @@ public class MainModel implements BaseModel  {
     }
 
     //上传文件
-    public Observable<String> uploadFile2(String token ,RequestBody requestBody,MultipartBody.Part file){
-        return MvpRetrofit.getInstance().getMvpApi().retrofitUploadFile(token,requestBody,file);
-    }
-    public Observable<String> uploadFile(String token,MultipartBody.Part file){
+//    public Observable<ResponseBody> uploadFile2(String token ,RequestBody requestBody,MultipartBody.Part file){
+//        return MvpRetrofit.getInstance().getMvpApi().retrofitUploadFile(token,requestBody,file);
+//    }
+    public Observable<ResponseBody> uploadFile(String token,MultipartBody.Part file){
         return MvpRetrofit.getInstance().getMvpApi().uploadFile(token,file);
     }
-    public Observable<String> login(String phone, String pass){
+    public Observable<ResponseBody> login(String phone, String pass){
 
         return MvpRetrofit.getInstance().getMvpApi().login(phone,pass);
     }
 
-    public Observable<String> createAliOrder(String token ,String id,String coin,String platform){
+    public Observable<ResponseBody> createAliOrder(String token ,String id,String coin,String platform){
         return MvpRetrofit.getInstance().getMvpApi().createAliOrder(token,id,coin,platform);
+    }
+    public Observable<ResponseBody> downloadFile(String url ){
+        return MvpRetrofit.getInstance().getMvpApi().downloadFile(url);
     }
 }

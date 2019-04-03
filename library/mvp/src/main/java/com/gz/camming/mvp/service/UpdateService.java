@@ -195,19 +195,6 @@ public class UpdateService extends Service {
             downloadSuccessNotificationFlag = intent.getIntExtra(DOWNLOAD_SUCCESS_NOTIFICATION_FLAG, 0);
             isSendBroadcast = intent.getBooleanExtra(IS_SEND_BROADCAST, false);
 
-//
-//            if (DEBUG) {
-//                Log.d(TAG, "downloadUrl: " + downloadUrl);
-//                Log.d(TAG, "icoResId: " + icoResId);
-//                Log.d(TAG, "icoSmallResId: " + icoSmallResId);
-//                Log.d(TAG, "storeDir: " + storeDir);
-//                Log.d(TAG, "updateProgress: " + updateProgress);
-//                Log.d(TAG, "downloadNotificationFlag: " + downloadNotificationFlag);
-//                Log.d(TAG, "downloadErrorNotificationFlag: " + downloadErrorNotificationFlag);
-//                Log.d(TAG, "downloadSuccessNotificationFlag: " + downloadSuccessNotificationFlag);
-//                Log.d(TAG, "isSendBroadcast: " + isSendBroadcast);
-//            }
-
             notifyId = startId;
             buildNotification();
             buildBroadcast();

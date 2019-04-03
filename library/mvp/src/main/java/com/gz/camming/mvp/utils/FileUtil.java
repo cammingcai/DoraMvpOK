@@ -3,10 +3,18 @@ package com.gz.camming.mvp.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.util.Log;
+
+import com.gz.camming.mvp.iml.UpdateProgressListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import okhttp3.ResponseBody;
 
 /**
  * Created by Administrator on 2017/7/12 0012.
@@ -116,6 +124,55 @@ public class FileUtil {
             return file.mkdirs();
         } else {
             return true;
+        }
+    }
+
+    /**
+     * 写入文件到sd卡
+     * 如下载apk
+     *
+     * */
+    public static boolean writeToFile(ResponseBody body, File file, UpdateProgressListener listener) {
+        try {
+            InputStream inputStream = null;
+            OutputStream outputStream = null;
+
+            long currentLength = 0;
+            long totalLength = body.contentLength();
+            try {
+                if(listener!=null)
+                    listener.start();
+                byte[] fileReader = new byte[2048];
+                inputStream =body.byteStream();
+                outputStream = new FileOutputStream(file);
+
+                int len;
+                while ((len = inputStream.read(fileReader))!=-1) {
+                    outputStream.write(fileReader, 0, len);
+                    currentLength += len;
+                    Log.d("FileUtils","当前长度: " + currentLength);
+                    int progress = (int) (100 * currentLength / totalLength);
+                    listener.update(progress);
+                    Log.d("FileUtils","当前进度: " + progress);
+                }
+                outputStream.flush();
+                if(listener!=null)
+                    listener.success();
+                return true;
+            } catch (IOException e) {
+                if(listener!=null)
+                    listener.error();
+                return false;
+            } finally {
+                if (inputStream != null) {
+                    inputStream.close();
+                }if (outputStream != null) {
+                    outputStream.close();}
+            }
+        } catch (IOException e) {
+            if(listener!=null)
+                listener.error();
+            return false;
         }
     }
 }

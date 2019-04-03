@@ -16,6 +16,7 @@ import com.gz.camming.mvp.bean.AibBean;
 import com.gz.camming.mvp.bean.LoginBean;
 import com.gz.camming.mvp.mvp.MainPresenter;
 import com.gz.camming.mvp.mvp.MainView;
+import com.gz.camming.mvp.mvp.retrofit.MvpApi;
 import com.gz.camming.mvp.ui.MvpActivity;
 import com.gz.camming.mvp.ui.view.loadingview.XLoadingView;
 import com.gz.camming.mvp.utils.XPermission;
@@ -53,8 +54,8 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                 showTips("没有权限");
             }
         });
-        final String path = Environment.getExternalStorageDirectory()  +"/aideacode/";
-        final String name  = "toggle_off.png";
+        final String path = Environment.getExternalStorageDirectory()  +"/aideadora/";
+        final String name  = "head.jpg";
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,11 +64,13 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 //                    Toast.makeText(MainActivity.this,"请输入城市ID",Toast.LENGTH_SHORT).show();
 //                    return;
 //                }
-                //mvpPresenter.login("13560048370","123456");
+//                mvpPresenter.login("13560048370","123456");
 //                mvpPresenter.createOrder("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjExLjE0XC9hcGlcL3VzZXJcL2xvZ2luIiwiaWF0IjoxNTU0MjU2NzYxLCJleHAiOjE1NTQzNDMxNjEsIm5iZiI6MTU1NDI1Njc2MSwianRpIjoiVEVoZGRWZ3BsV1dkYmVrayIsInN1YiI6MTEyLCJwcnYiOiJiOTEyNzk5NzhmMTFhYTdiYzU2NzA0ODdmZmYwMWUyMjgyNTNmZTQ4In0.4EhSn6m_Fw5tFYl64KYQRfTt-R9Jz7k0ZOh4_1b5h4k",
 //                        "1","0","1");
-                mvpPresenter.uploadFile("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjExLjE0XC9hcGlcL3VzZXJcL2xvZ2luIiwiaWF0IjoxNTU0MjU2NzYxLCJleHAiOjE1NTQzNDMxNjEsIm5iZiI6MTU1NDI1Njc2MSwianRpIjoiVEVoZGRWZ3BsV1dkYmVrayIsInN1YiI6MTEyLCJwcnYiOiJiOTEyNzk5NzhmMTFhYTdiYzU2NzA0ODdmZmYwMWUyMjgyNTNmZTQ4In0.4EhSn6m_Fw5tFYl64KYQRfTt-R9Jz7k0ZOh4_1b5h4k",
-                        path,name );
+//                mvpPresenter.uploadFile("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjExLjE0XC9hcGlcL3VzZXJcL2xvZ2luIiwiaWF0IjoxNTU0MjgxNTU3LCJleHAiOjE1NTQzNjc5NTcsIm5iZiI6MTU1NDI4MTU1NywianRpIjoidkVrWDBiRVRtakRMY296TCIsInN1YiI6MTEyLCJwcnYiOiJiOTEyNzk5NzhmMTFhYTdiYzU2NzA0ODdmZmYwMWUyMjgyNTNmZTQ4In0.VM9Nskb7lKoe1K-ROwFNJTpeZEHrWt6MWf2v8ziAyxA",
+//                        path,name );
+                mvpPresenter.downLoadFile("https://download.tfwangs.com/apk/DoraAI_1.0.30.apk",
+                        path,"dora.apk");
             }
         });
     }

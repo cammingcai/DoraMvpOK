@@ -1,16 +1,11 @@
 package com.gz.camming.mvp.mvp.retrofit;
 
 
+import com.gz.camming.mvp.iml.UpdateProgressListener;
 
-import com.gz.camming.mvp.BuildConfig;
-
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  *
@@ -21,6 +16,9 @@ public class MvpRetrofit {
     private Retrofit  mRetrofit;
 
     private MvpApi mMvpApi;
+
+    private boolean isDownload;
+    private UpdateProgressListener mUpdateProgressListener;
     public static MvpRetrofit getInstance(){
         if(instance==null){
             synchronized (MvpRetrofit.class){
@@ -37,24 +35,26 @@ public class MvpRetrofit {
 
     private  Retrofit retrofit() {
         if (mRetrofit == null) {
-//            OkHttpClient.Builder builder = new OkHttpClient.Builder();
-//
-//            if (BuildConfig.DEBUG) {
-//                // Log信息拦截器
-//                HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-//                loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//                //设置 Debug Log 模式
-//                builder.addInterceptor(loggingInterceptor);
-//            }
-//            OkHttpClient okHttpClient = builder.build();
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-            OkHttpClient okHttpClient = new OkHttpClient();
+          //  if (isDownload) {
+                // Log信息拦截器
+               // HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+//                if(mUpdateProgressListener!=null){
+//                    JsDownloadInterceptor mInterceptor = new JsDownloadInterceptor(mUpdateProgressListener);
+//                    builder.addInterceptor(mInterceptor);
+//                }
+                //isDownload = false;
+//            }
+            OkHttpClient okHttpClient = builder.build();
+
+//            OkHttpClient okHttpClient = new OkHttpClient();
             mRetrofit = new Retrofit.Builder()
                     //设置网络请求的Url地址
                     .baseUrl(MvpApi.API_SERVER_URL)
                     //设置数据解析器
 //                    .addConverterFactory(GsonConverterFactory.create())
-                    .addConverterFactory(ScalarsConverterFactory.create())
+//                    .addConverterFactory(ScalarsConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(okHttpClient)
                     .build();
@@ -78,4 +78,12 @@ public class MvpRetrofit {
         return  mMvpApi;
     }
 
+
+    public void setDownloadState(boolean downloadState){
+        this.isDownload = downloadState;
+    }
+
+    public void setDownloadListener(UpdateProgressListener listener){
+        this.mUpdateProgressListener = listener;
+    }
 }

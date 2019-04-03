@@ -151,7 +151,7 @@ public class PhotoUtils {
      *
      * 保存裁剪图片到SD卡
      * */
-    public static boolean saveBitmapSDcart(Context context,Uri uri,String path ,String name){
+    public static boolean saveBitmapSDcard(Context context,Uri uri,String path ,String name){
         File file = null;
         try {
             //保存文件到sd
