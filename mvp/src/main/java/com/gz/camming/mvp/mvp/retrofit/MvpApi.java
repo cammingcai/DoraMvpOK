@@ -7,6 +7,8 @@ import com.gz.camming.mvp.bean.LoginBean;
 import com.gz.camming.mvp.bean.WetherBean;
 import com.gz.camming.mvp.mvp.MainModel;
 
+import java.io.File;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -53,7 +55,8 @@ public interface MvpApi {
     //baseUrl
    // String API_SERVER_URL = "http://127.0.0.1:8080/";
 //    String API_SERVER_URL = "http://192.168.11.237:8181/";
-    String API_SERVER_URL = "http://120.78.121.247:8090/";
+    String API_SERVER_URL = "http://192.168.11.14/";
+//    String API_SERVER_URL = "http://120.78.121.247:8090/";
 
     //加载天气
     @Headers("apikey:81bf9da930c7f9825a3c3383f1d8d766")
@@ -70,14 +73,24 @@ public interface MvpApi {
     Observable<WetherBean> queryWether(@Query("key") String key, @Query("city_id") String city_id
     , @Query("weather_date") String weather_date);
 
-//    @POST("api/user/login")
-//    Observable<LoginBean> login(@Query("phone") String phone,@Query("password") String password);
+    @POST("api/user/login")
+    Observable<String> login(@Query("phone") String phone,@Query("password") String password);
 
+    @POST("api/alipay/createOrder")
+    Observable<String> createAliOrder(@Query("token") String token,@Query("id") String id,
+                                      @Query("study_coin") String study_coin,@Query("platform") String platform);
+
+    @POST("api/alipay/createOrder")
+    Observable<String> uploadHead(@Query("token") String token,@Query("id") String id);
+
+    @Multipart
+    @POST("api/user/avatar")
+    Observable<String> uploadFile(@Query("token") String token, @Part MultipartBody.Part file);
 //    @POST("api/user/shiroLogin")
 //    Observable<LoginBean> login(@Query("phone") String phone,@Query("wordpass") String password);
 
-    @POST("api/user/shiroLogin")
-    Observable<LoginBean> login(@Query("phone") String phone,@Query("wordpass") String password);
+//    @POST("api/user/shiroLogin")
+//    Observable<String> login(@Query("phone") String phone,@Query("wordpass") String password);
     //PDF文件Retrofit下载
     @Streaming
     @GET
@@ -85,6 +98,6 @@ public interface MvpApi {
 
     @Multipart
     @POST
-    Observable<String> retrofitUploadFile(@Part  RequestBody requestBody, @Part MultipartBody.Part file);
+    Observable<String> retrofitUploadFile(@Query("token") String token,@Part  RequestBody requestBody, @Part MultipartBody.Part file);
 
 }

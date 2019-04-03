@@ -24,6 +24,9 @@ public abstract class Mvp<P extends BasePresenter> {
     public void hideLoading() {
       //  ProgressDialog.getInstance().dismiss();
     }
+    public void showTips(String msg){
+
+    }
 }
 
 

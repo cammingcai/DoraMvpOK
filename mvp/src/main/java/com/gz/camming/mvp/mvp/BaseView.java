@@ -15,4 +15,7 @@ public interface BaseView {
      * 隐藏正在加载进度框
      */
     void hideLoading();
+
+    void showTips(String msg);
+
 }

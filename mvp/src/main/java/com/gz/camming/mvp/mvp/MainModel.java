@@ -11,6 +11,8 @@ import com.gz.camming.mvp.bean.LoginBean;
 import com.gz.camming.mvp.bean.WetherBean;
 import com.gz.camming.mvp.mvp.retrofit.MvpRetrofit;
 
+import java.io.File;
+
 /**
  *  Model接口 创建对应的联网请求的方法
  *  将Presenter提交的字段放到联网请求中，发送给服务器
@@ -23,12 +25,18 @@ public class MainModel implements BaseModel  {
     }
 
     //上传文件
-    public Observable<String> uploadFile(RequestBody requestBody,MultipartBody.Part file){
-        return MvpRetrofit.getInstance().getMvpApi().retrofitUploadFile(requestBody,file);
+    public Observable<String> uploadFile2(String token ,RequestBody requestBody,MultipartBody.Part file){
+        return MvpRetrofit.getInstance().getMvpApi().retrofitUploadFile(token,requestBody,file);
     }
-
-    public Observable<LoginBean> login(String phone, String pass){
+    public Observable<String> uploadFile(String token,MultipartBody.Part file){
+        return MvpRetrofit.getInstance().getMvpApi().uploadFile(token,file);
+    }
+    public Observable<String> login(String phone, String pass){
 
         return MvpRetrofit.getInstance().getMvpApi().login(phone,pass);
+    }
+
+    public Observable<String> createAliOrder(String token ,String id,String coin,String platform){
+        return MvpRetrofit.getInstance().getMvpApi().createAliOrder(token,id,coin,platform);
     }
 }

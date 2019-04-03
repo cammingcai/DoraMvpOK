@@ -31,7 +31,30 @@ public class MainPresenter extends BasePresenter<MainView> {
     public void login(String phone,String pas){
         mvpView.showLoading("加载中");
         requestDataSubscription(model.login(phone,pas),
-                new MvpRxjavaCallback<String>() {
+                new MvpRxjavaCallback() {
+                    @Override
+                    public void onSuccess(String model) {
+
+                        mvpView.getDataSuccess(model);
+                    }
+
+                    @Override
+                    public void onFailure(String msg) {
+                        mvpView.getDataFail(msg);
+                    }
+
+
+                    @Override
+                    public void onFinish() {
+                        mvpView.hideLoading();
+                    }
+
+                });
+    }
+    public void createOrder(String token,String id,String coin,String platform){
+        mvpView.showLoading("加载中");
+        requestDataSubscription(model.createAliOrder(token,id,coin,platform),
+                new MvpRxjavaCallback() {
                     @Override
                     public void onSuccess(String model) {
 
@@ -52,26 +75,23 @@ public class MainPresenter extends BasePresenter<MainView> {
                 });
     }
 
-
-
-
-
     /**
-     * 上传头像
-     *
+     * 上传文件
      * */
-    public void uploadFile(String path) {
+    public void uploadFile(String token,String path,String name) {
         if(!isMvpView()){
             throw new RuntimeException("not  mvp view");
         }
+        File file = new File(path,name);
+        if(!file.exists()){
+            mvpView.showTips("文件不存在");
+            return;
+        }
         mvpView.showLoading("加载中");
-
-        File file = new File(path);
-
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part part = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
-        requestDataSubscription(model.uploadFile(requestBody,part),
-                new MvpRxjavaCallback<String>() {
+        MultipartBody.Part part = MultipartBody.Part.createFormData("avatar", file.getName(), requestBody);
+                requestDataSubscription(model.uploadFile(token,part),
+                new MvpRxjavaCallback() {
                     @Override
                     public void onSuccess(String model) {
 
@@ -92,4 +112,6 @@ public class MainPresenter extends BasePresenter<MainView> {
                 });
 
     }
+
+
 }

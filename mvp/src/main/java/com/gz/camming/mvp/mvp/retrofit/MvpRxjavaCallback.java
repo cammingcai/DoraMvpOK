@@ -7,6 +7,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -19,7 +22,7 @@ import retrofit2.HttpException;
 /**
 
  */
-public abstract class MvpRxjavaCallback<M> extends DisposableObserver<M> {
+public abstract class MvpRxjavaCallback extends DisposableObserver<String> {
 
 
 //    private Handler handler = new Handler();
@@ -27,7 +30,7 @@ public abstract class MvpRxjavaCallback<M> extends DisposableObserver<M> {
      * 数据请求成功
      * @param model 请求到的数据
      */
-    public abstract void onSuccess(M model);
+    public abstract void onSuccess(String model);
     /**
      *  使用网络API接口请求方式时，虽然已经请求成功但是由
      *  于{@code msg}的原因无法正常返回数据。
@@ -40,8 +43,20 @@ public abstract class MvpRxjavaCallback<M> extends DisposableObserver<M> {
     public abstract void onFinish();
 
     @Override
-    public void onNext(M model) {
-        onSuccess(model);
+    public void onNext(String model) {
+        JSONObject json = null;
+        try {
+            json = new JSONObject(model);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }finally {
+            if(json!=null)
+                onSuccess(json.toString());
+            else{
+                onSuccess(model);
+            }
+        }
+//        onSuccess(model);
 //        Log.i("MvpRxjavaCallback",model.toString());
 //        onSuccess(new Gson().<M>fromJson (model.toString(),getTClass(this.getClass() )));
 

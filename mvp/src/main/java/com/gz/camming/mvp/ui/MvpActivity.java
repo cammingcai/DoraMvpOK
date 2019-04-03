@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.gz.camming.mvp.mvp.BasePresenter;
 import com.gz.camming.mvp.utils.ProgressDialog;
+import com.gz.camming.mvp.utils.ToastUtils;
 
 
 /**
@@ -32,6 +33,10 @@ public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity 
     }
     public void hideLoading() {
         ProgressDialog.getInstance().dismiss();
+    }
+
+    public void showTips(String msg){
+        ToastUtils.show(this,msg);
     }
 
 }
