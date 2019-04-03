@@ -8,6 +8,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 
@@ -81,15 +83,19 @@ public class XAppUtils {
      * 安装下载完成的apk
      * @param file
      */
-    public static void installApk(File file) {
+    public static void installApk(Context context,File file) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        Log.e( "installApk: ",file.getAbsolutePath());
-        intent.setDataAndType(ImageUtils.getUriForFile(mContext,file), "application/vnd.android.package-archive");
-        //解决startActivity采取的上下文的Context而不是Activity
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
-        //解决手机安装软件的权限问题
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        mContext.startActivity(intent);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Uri fileUri = FileProvider.getUriForFile(context, getPackageInfo().packageName+".fileprovider",file);
+            intent.setDataAndType(fileUri, "application/vnd.android.package-archive");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        } else {
+            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(intent);
     }
 
 
