@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <!--
+	  数据库名
+    	<dbname value="demo" ></dbname>
+    -->
+    <dbname value="camming" />
+
+    <!--
+        数据库的版本号
+    	<version value="1" ></version>
+    -->
+    <version value="1" />
+
+    <!--
+    	数据库的映射模型（数据库表）
+    	建立好Model后，我们就把他配置到映射列表中，即编辑assest目录下的litepal.xml文件，
+    在<list>标签中加入DEST类的声明，这里要注意，要类的完整类名。
+    	</list>
+    -->
+    <list>
+        <mapping class="org.litepal.litepalsample.model.User" />
+    </list>
+
+
+    <!--数据库的映射模型的地址（数据库表结构）-->
+    <storage value="external" />
+
+</litepal>

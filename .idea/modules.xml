@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DoraMvp.iml" filepath="$PROJECT_DIR$/DoraMvp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mvp/mvp.iml" filepath="$PROJECT_DIR$/mvp/mvp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/litepal/litepal.iml" filepath="$PROJECT_DIR$/library/litepal/litepal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/mvp/mvp.iml" filepath="$PROJECT_DIR$/library/mvp/mvp.iml" />
     </modules>
   </component>
 </project>
