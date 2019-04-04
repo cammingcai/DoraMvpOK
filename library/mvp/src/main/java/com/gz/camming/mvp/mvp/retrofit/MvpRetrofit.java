@@ -1,7 +1,7 @@
 package com.gz.camming.mvp.mvp.retrofit;
 
 
-import com.gz.camming.mvp.iml.UpdateProgressListener;
+import com.gz.camming.mvp.iml.DownloadListener;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -17,8 +17,8 @@ public class MvpRetrofit {
 
     private MvpApi mMvpApi;
 
-    private boolean isDownload;
-    private UpdateProgressListener mUpdateProgressListener;
+//    private boolean isDownload;
+//    private UpdateProgressListener mUpdateProgressListener;
     public static MvpRetrofit getInstance(){
         if(instance==null){
             synchronized (MvpRetrofit.class){
@@ -79,11 +79,11 @@ public class MvpRetrofit {
     }
 
 
-    public void setDownloadState(boolean downloadState){
-        this.isDownload = downloadState;
-    }
-
-    public void setDownloadListener(UpdateProgressListener listener){
-        this.mUpdateProgressListener = listener;
-    }
+//    public void setDownloadState(boolean downloadState){
+//        this.isDownload = downloadState;
+//    }
+//
+//    public void setDownloadListener(UpdateProgressListener listener){
+//        this.mUpdateProgressListener = listener;
+//    }
 }

@@ -33,7 +33,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import com.gz.camming.mvp.R;
-import com.gz.camming.mvp.iml.UpdateProgressListener;
+import com.gz.camming.mvp.iml.DownloadListener;
 
 
 /**
@@ -78,7 +78,7 @@ public class UpdateService extends Service {
     private int downloadErrorNotificationFlag;
     private boolean isSendBroadcast;
 
-    private UpdateProgressListener updateProgressListener;
+    private DownloadListener updateProgressListener;
     private LocalBinder localBinder = new LocalBinder();
 
     /**
@@ -90,7 +90,7 @@ public class UpdateService extends Service {
          *
          * @param listener
          */
-        public void setUpdateProgressListener(UpdateProgressListener listener) {
+        public void setUpdateProgressListener(DownloadListener listener) {
             UpdateService.this.setUpdateProgressListener(listener);
         }
     }
@@ -215,7 +215,7 @@ public class UpdateService extends Service {
         return true;
     }
 
-    public void setUpdateProgressListener(UpdateProgressListener updateProgressListener) {
+    public void setUpdateProgressListener(DownloadListener updateProgressListener) {
         this.updateProgressListener = updateProgressListener;
     }
 

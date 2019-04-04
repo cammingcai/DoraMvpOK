@@ -2,9 +2,9 @@ package com.gz.camming.mvp.iml;
 
 /**
  *
- *
+ *下载文件接口
  */
-public interface UpdateProgressListener {
+public interface DownloadListener {
     /**
      * 开始下载
      */

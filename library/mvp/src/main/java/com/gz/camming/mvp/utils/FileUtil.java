@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Environment;
 import android.util.Log;
 
-import com.gz.camming.mvp.iml.UpdateProgressListener;
+import com.gz.camming.mvp.iml.DownloadListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -132,7 +132,7 @@ public class FileUtil {
      * 如下载apk
      *
      * */
-    public static boolean writeToFile(ResponseBody body, File file, UpdateProgressListener listener) {
+    public static boolean writeToFile(ResponseBody body, File file, DownloadListener listener) {
         try {
             InputStream inputStream = null;
             OutputStream outputStream = null;
