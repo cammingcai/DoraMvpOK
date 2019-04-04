@@ -43,6 +43,7 @@ public abstract class MvpRxjavaCallback extends DisposableObserver<ResponseBody>
     @Override
     public void onNext(ResponseBody model) {
         //onSuccess(model);
+        //解析服务器返回的code，成功才解析数据
         onDownloadFile(model);
         JSONObject json = null;
         try {

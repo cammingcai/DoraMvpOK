@@ -2,6 +2,28 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
+//    signingConfigs {
+//
+//
+//        def password = "aidea123"
+//        def alias = "aidea"
+//        def filePath = "../aidea.jks"  //签名文件路径
+//
+//        debug {
+//            keyAlias alias
+//            keyPassword password
+//            storeFile file(filePath)
+//            storePassword(password)
+//        }
+//        release {
+//            keyAlias alias
+//            keyPassword password
+//            storeFile file(filePath)
+//            storePassword(password)
+//        }
+//
+//    }
+
     defaultConfig {
         applicationId "com.gz.dora.mvp"
         minSdkVersion 14

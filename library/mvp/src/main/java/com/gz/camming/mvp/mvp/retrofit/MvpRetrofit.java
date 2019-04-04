@@ -3,7 +3,12 @@ package com.gz.camming.mvp.mvp.retrofit;
 
 import com.gz.camming.mvp.iml.DownloadListener;
 
+import java.io.IOException;
+
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -36,16 +41,24 @@ public class MvpRetrofit {
     private  Retrofit retrofit() {
         if (mRetrofit == null) {
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
-
-          //  if (isDownload) {
-                // Log信息拦截器
-               // HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-//                if(mUpdateProgressListener!=null){
-//                    JsDownloadInterceptor mInterceptor = new JsDownloadInterceptor(mUpdateProgressListener);
-//                    builder.addInterceptor(mInterceptor);
-//                }
-                //isDownload = false;
-//            }
+            /**
+             * 设置头信息
+             */
+            Interceptor headerInterceptor = new Interceptor() {
+                @Override
+                public Response intercept(Chain chain) throws IOException {
+                    Request originalRequest = chain.request();
+                    Request.Builder requestBuilder = originalRequest.newBuilder()
+                            .addHeader("Accept-Encoding", "gzip")
+                            .addHeader("Accept", "application/json")
+                            .addHeader("Content-Type", "application/json; charset=utf-8")
+                            .method(originalRequest.method(), originalRequest.body());
+//                    requestBuilder.addHeader("Authorization", "Bearer " + BaseConstant.TOKEN);//添加请求头信息，服务器进行token有效性验证
+                    Request request = requestBuilder.build();
+                    return chain.proceed(request);
+                }
+            };
+            builder.addInterceptor(headerInterceptor);
             OkHttpClient okHttpClient = builder.build();
 
 //            OkHttpClient okHttpClient = new OkHttpClient();

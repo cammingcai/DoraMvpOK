@@ -1,11 +1,15 @@
 package com.gz.camming.mvp.mvp;
 
 
+import com.gz.camming.mvp.mvp.retrofit.MvpRetrofitCallback;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.MultipartBody;
 
 
@@ -38,6 +42,7 @@ public class BasePresenter<V> {
 
 
     //RxJava取消注册，以避免内存泄露
+    //取消请求
     public void onUnSubscribe() {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.dispose();
@@ -52,14 +57,18 @@ public class BasePresenter<V> {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
         }
-
         mCompositeDisposable.add(observer);
-
         // Schedulers.io() I/O 操作（读写文件、数据库、网络请求等）  请求数据在IO线程
         // AndroidSchedulers.mainThread() RxJava 扩展的 Android 主线程
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())//请求完成后再主线程更新UI
+               // .retry(1)//请求失败重连次数
                 .subscribeWith(observer);
+    }
+
+    public void requestRetrofitData(Call call, Callback callback){
+//        call.enqueue(callback);
+//        call.enqueue(new MvpRetrofitCallback<>());
     }
 
 
