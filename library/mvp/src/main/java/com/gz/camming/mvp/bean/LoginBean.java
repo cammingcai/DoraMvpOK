@@ -34,12 +34,12 @@ public class LoginBean {
         this.data = data;
     }
 
-
     @Override
     public String toString() {
         return "LoginBean{" +
-                "code='" + code + '\'' +
+                "code=" + code +
                 ", message='" + message + '\'' +
+                ", data=" + data +
                 '}';
     }
 }

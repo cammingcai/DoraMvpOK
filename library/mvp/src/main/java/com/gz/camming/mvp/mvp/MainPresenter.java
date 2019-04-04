@@ -3,8 +3,10 @@ package com.gz.camming.mvp.mvp;
 
 import android.util.Log;
 
+import com.gz.camming.mvp.bean.LoginBean;
 import com.gz.camming.mvp.iml.DownloadListener;
 import com.gz.camming.mvp.mvp.retrofit.MvpRxjavaCallback;
+import com.gz.camming.mvp.mvp.retrofit.RxjavaCallback;
 import com.gz.camming.mvp.utils.FileUtil;
 
 import java.io.File;
@@ -31,10 +33,30 @@ public class MainPresenter extends BasePresenter<MainView> {
         return mvpView!=null;
     }
 
+//    public void login(String phone,String pas){
+//        mvpView.showLoading("加载中");
+//        requestDataSubscription(model.login(phone,pas),callback);
+//    }
     public void login(String phone,String pas){
         mvpView.showLoading("加载中");
-        requestDataSubscription(model.login(phone,pas),callback);
+        requestRxjavaDataObservable(model.login(phone, pas), new RxjavaCallback<String>() {
+            @Override
+            public void onSuccess(String model) {
+                mvpView.getDataSuccess(model);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mvpView.getDataFail(msg);
+            }
+
+            @Override
+            public void onFinish() {
+                mvpView.hideLoading();
+            }
+        });
     }
+
     public void createOrder(String token,String id,String coin,String platform){
         mvpView.showLoading("加载中");
         requestDataSubscription(model.createAliOrder(token,id,coin,platform),callback);

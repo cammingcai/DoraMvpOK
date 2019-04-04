@@ -55,8 +55,8 @@ public interface MvpApi {
     //baseUrl
    // String API_SERVER_URL = "http://127.0.0.1:8080/";
 //    String API_SERVER_URL = "http://192.168.11.237:8181/";
-  //  String API_SERVER_URL = "http://192.168.11.14/";//https://download.tfwangs.com/apk/DoraAI_1.0.30.apk
-    String API_SERVER_URL = "https://download.tfwangs.com/";
+    String API_SERVER_URL = "http://192.168.11.14/";//https://download.tfwangs.com/apk/DoraAI_1.0.30.apk
+//    String API_SERVER_URL = "https://download.tfwangs.com/";
 //    String API_SERVER_URL = "http://120.78.121.247:8090/";
 
     //加载天气
