@@ -83,6 +83,7 @@ public interface MvpApi {
 
 
 
+
     @Multipart
     @POST("api/user/avatar")
     Observable<ResponseBody> uploadFile(@Query("token") String token, @Part MultipartBody.Part file);
@@ -92,11 +93,5 @@ public interface MvpApi {
     @GET
     Observable<ResponseBody> downloadFile(@Url String fileUrl);
 
-    @Streaming
-    @GET
-    Observable<String> retrofitdownloadFile(@Url String url);
-//    @Multipart
-//    @POST
-//    Observable<String> retrofitUploadFile(@Query("token") String token,@Part  RequestBody requestBody, @Part MultipartBody.Part file);
 
 }
