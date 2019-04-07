@@ -32,23 +32,12 @@ import retrofit2.http.Url;
  *  @ QueryMap(GET请求):如果入参比较多，就可以把它们都放在Map中
  *  @ Body(POST请求):可以指定一个对象作为HTTP请求体
  *  @ Field(POST请求):用于传送表单数据：开头必须多加上@FormUrlEncoded这句注释  替换参数值，是结合post请求的
- *
- *
- //    @Headers(MvpStores.API_SERVER_URL)
- //    @GET("user")
- //    Call<WetherBean> getUser();
- //@GET("user")
- //Call<User> getUser(@Header("Authorization") String authorization)
- //@FormUrlEncoded
- //@POST("user/edit")
- //Call<User> updateUser(@Field("first_name") String first, @Field("last_name") String last);
- //@POST("users/new")
- //Call<User> createUser(@Body User user);
-
- @GET("group/{id}/users")
- Call<Book> groupList(@Path("id") int groupId);
- @GET("book/search")
- Call<Book> getSearchBook(@QueryMap Map<String, String> options);
+ *  @ Headers 请求头
+ *  post提交数据方式
+ *  application/x-www-form-urlencoded  表单数据
+ *  multipart/form-data 文件上传
+ *  application/json json数据格式
+ *  text/xml  xml数据格式
  *
  */
 public interface MvpApi {
