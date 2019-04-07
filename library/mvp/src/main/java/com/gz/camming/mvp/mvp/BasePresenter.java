@@ -3,6 +3,8 @@ package com.gz.camming.mvp.mvp;
 
 import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
+import com.gz.camming.mvp.exception.ApiException;
 import com.gz.camming.mvp.http.XHttp;
 import com.gz.camming.mvp.mvp.retrofit.MvpRetrofitCallback;
 import com.gz.camming.mvp.mvp.retrofit.RxjavaCallback;
@@ -11,6 +13,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
+import java.text.ParseException;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -140,6 +146,27 @@ public class BasePresenter<V> implements BaseMvp.BaseMvpPresenter<V>{
         public void onError(Throwable e) {
             if(mRxjavaCallback!=null)
                 mRxjavaCallback.onFailure(e.getMessage());
+//            ApiException ex;
+//            try {
+//                if(e instanceof JsonParseException|| e instanceof JSONException
+//                        || e instanceof ParseException){
+//                    ex  = new ApiException(0,"json parse exception",e.getMessage());
+//                    throw ex;
+//
+//                }else if(e instanceof ConnectException){
+//                    ex  = new ApiException(1,"netword connect exception",e.getMessage());
+//                    throw ex;
+//                }else if(e instanceof UnknownHostException
+//                        || e instanceof SocketTimeoutException){
+//                    ex  = new ApiException(2,"netword connect exception",e.getMessage());
+//                    throw ex;
+//                }else{
+//                    ex  = new ApiException(1,"unknown exception",e.getMessage());
+//                    throw ex;
+//                }
+//            } catch (ApiException e1) {
+//                e1.printStackTrace();
+//            }
         }
 
         @Override
