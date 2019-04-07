@@ -9,6 +9,7 @@ import retrofit2.http.Part;
 import com.gz.camming.mvp.bean.AibBean;
 import com.gz.camming.mvp.bean.LoginBean;
 import com.gz.camming.mvp.bean.WetherBean;
+import com.gz.camming.mvp.mvp.retrofit.MvpApi;
 import com.gz.camming.mvp.mvp.retrofit.MvpRetrofit;
 
 import java.io.File;
@@ -19,9 +20,13 @@ import java.io.File;
  */
 public class MainModel implements BaseModel  {
 
+    @Override
+    public MvpApi getMvpApi() {
+        return MvpRetrofit.getInstance().getMvpApi();
+    }
     //查询天气 测试
     public Observable<WetherBean> queryWether(String key, String cityid,String date){
-        return MvpRetrofit.getInstance().getMvpApi().queryWether(key,cityid,date);
+        return getMvpApi().queryWether(key,cityid,date);
     }
 
     //上传文件
@@ -29,17 +34,19 @@ public class MainModel implements BaseModel  {
 //        return MvpRetrofit.getInstance().getMvpApi().retrofitUploadFile(token,requestBody,file);
 //    }
     public Observable<ResponseBody> uploadFile(String token,MultipartBody.Part file){
-        return MvpRetrofit.getInstance().getMvpApi().uploadFile(token,file);
+        return getMvpApi().uploadFile(token,file);
     }
     public Observable<ResponseBody> login(String phone, String pass){
 
-        return MvpRetrofit.getInstance().getMvpApi().login(phone,pass);
+        return getMvpApi().login(phone,pass);
     }
 
     public Observable<ResponseBody> createAliOrder(String token ,String id,String coin,String platform){
-        return MvpRetrofit.getInstance().getMvpApi().createAliOrder(token,id,coin,platform);
+        return getMvpApi().createAliOrder(token,id,coin,platform);
     }
     public Observable<ResponseBody> downloadFile(String url ){
-        return MvpRetrofit.getInstance().getMvpApi().downloadFile(url);
+        return getMvpApi().downloadFile(url);
     }
+
+
 }

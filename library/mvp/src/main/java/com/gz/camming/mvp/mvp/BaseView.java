@@ -6,16 +6,6 @@ package com.gz.camming.mvp.mvp;
  * 的作用是根据具体业务的需要，
  * 为Presenter提供调用Activity中具体UI逻辑操作的方法。
  */
-public interface BaseView {
-    /**
-     * 显示正在加载进度框
-     */
-    void showLoading(String msg);
-    /**
-     * 隐藏正在加载进度框
-     */
-    void hideLoading();
-
-    void showTips(String msg);
+public interface BaseView extends BaseMvp.BaseMvpView {
 
 }

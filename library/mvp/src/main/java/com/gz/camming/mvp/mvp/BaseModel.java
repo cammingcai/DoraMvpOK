@@ -5,5 +5,7 @@ package com.gz.camming.mvp.mvp;
  * code is data ,data is code
  */
 
-public interface BaseModel {
+public interface BaseModel extends BaseMvp.BaseMvpModel{
+
+
 }

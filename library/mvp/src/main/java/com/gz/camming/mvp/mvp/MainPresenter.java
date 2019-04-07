@@ -29,22 +29,12 @@ public class MainPresenter extends BasePresenter<MainView> {
         model = new MainModel();
     }
 
+    /**是否绑定了View*/
     private boolean isMvpView(){
         return mvpView!=null;
     }
 
-//    public void login(String phone,String pas){
-//        mvpView.showLoading("加载中");
-//        requestDataSubscription(model.login(phone,pas),callback);
-//    }
 
-
-    /**
-     * MVP
-     * model 负责数据请求
-     * presenter 负责数据处理
-     * view 负责数据展示
-     */
     public void login(String phone,String pas){
         mvpView.showLoading("加载中");
         requestRxjavaDataObservable(model.login(phone, pas), new RxjavaCallback<String>() {
