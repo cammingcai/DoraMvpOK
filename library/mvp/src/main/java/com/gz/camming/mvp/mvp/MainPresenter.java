@@ -8,6 +8,7 @@ import com.gz.camming.mvp.iml.DownloadListener;
 import com.gz.camming.mvp.mvp.retrofit.MvpRxjavaCallback;
 import com.gz.camming.mvp.mvp.retrofit.RxjavaCallback;
 import com.gz.camming.mvp.utils.FileUtil;
+import com.gz.camming.mvp.utils.SharedPreferenceUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,10 +30,6 @@ public class MainPresenter extends BasePresenter<MainView> {
         model = new MainModel();
     }
 
-    /**是否绑定了View*/
-    private boolean isMvpView(){
-        return mvpView!=null;
-    }
 
 
     public void login(String phone,String pas){
@@ -64,7 +61,7 @@ public class MainPresenter extends BasePresenter<MainView> {
      * 上传文件
      * */
     public void uploadFile(String token,String path,String name) {
-        if(!isMvpView()){
+        if(!isBingVeiw()){
             throw new RuntimeException("not  mvp view");
         }
         File file = new File(path,name);
@@ -78,9 +75,34 @@ public class MainPresenter extends BasePresenter<MainView> {
                 requestDataSubscription(model.uploadFile(token,part),callback);
 
     }
+    private long lastTime;
+    public void getNews(String channel){
+        //lastTime = SharedPreferenceUtil.getLongValue(channel,0);//读取对应频道下最后一次刷新的时间戳
+        if (lastTime == 0){
+            //如果为空，则是从来没有刷新过，使用当前时间戳
+            lastTime = System.currentTimeMillis() / 1000;
+        }
+        mvpView.showLoading("加载中");
+        requestRxjavaDataObservable(model.getNews(channel,lastTime,lastTime),new RxjavaCallback<String>() {
+            @Override
+            public void onSuccess(String model) {
+                mvpView.getDataSuccess(model);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mvpView.getDataFail(msg);
+            }
+
+            @Override
+            public void onFinish() {
+                mvpView.hideLoading();
+            }
+        });
+    }
 
     public void downLoadFile(String url,String path,String name){
-        if(!isMvpView()){
+        if(!isBingVeiw()){
             throw new RuntimeException("not  mvp view");
         }
         File dirFile =  new File(path);
@@ -97,7 +119,6 @@ public class MainPresenter extends BasePresenter<MainView> {
         }
         mvpView.showLoading("下载中");
 
-//        MvpRetrofit.getInstance().setDownloadState(true);
 
         requestDataSubscription(model.downloadFile(url),
                 new MvpRxjavaCallback() {

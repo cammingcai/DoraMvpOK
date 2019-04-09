@@ -1283,8 +1283,7 @@ public class DataSupport {
     }
 
 	/**
-	 * Updates the corresponding record by id with ContentValues. Returns the
-	 * number of affected rows.
+	 * 使用ContentValues通过id更新相应的记录
 	 * 
 	 * <pre>
 	 * ContentValues cv = new ContentValues();
@@ -1294,13 +1293,9 @@ public class DataSupport {
 	 * 
 	 * This means that the name of record 1 will be updated into Jim.<br>
 	 * 
-	 * @param modelClass
-	 *            Which table to update by class.
-	 * @param values
-	 *            A map from column names to new column values. null is a valid
-	 *            value that will be translated to NULL.
-	 * @param id
-	 *            Which record to update.
+	 * @param modelClass 更新的表  表类名.
+	 * @param values 表中的列名称和值.
+	 * @param id 更新表中的哪个id的记录.
 	 * @return The number of rows affected.
 	 */
 	public static synchronized int update(Class<?> modelClass, ContentValues values, long id) {
@@ -1358,17 +1353,8 @@ public class DataSupport {
 	 * 
 	 * @param modelClass
 	 *            Which table to update by class.
-	 * @param values
-	 *            A map from column names to new column values. null is a valid
-	 *            value that will be translated to NULL.
+	 * @param values .
 	 * @param conditions
-	 *            A string array representing the WHERE part of an SQL
-	 *            statement. First parameter is the WHERE clause to apply when
-	 *            updating. The way of specifying place holders is to insert one
-	 *            or more question marks in the SQL. The first question mark is
-	 *            replaced by the second element of the array, the next question
-	 *            mark by the third, and so on. Passing empty string will update
-	 *            all rows.
 	 * @return The number of rows affected.
 	 */
 	public static synchronized int updateAll(Class<?> modelClass, ContentValues values,

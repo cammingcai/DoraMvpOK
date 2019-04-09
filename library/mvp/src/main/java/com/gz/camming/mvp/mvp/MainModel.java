@@ -47,6 +47,8 @@ public class MainModel implements BaseModel  {
     public Observable<ResponseBody> downloadFile(String url ){
         return getMvpApi().downloadFile(url);
     }
-
+    public Observable<ResponseBody> getNews(String channel,long last ,long current ){
+        return getMvpApi().getNewsList(channel,0,0);
+    }
 
 }

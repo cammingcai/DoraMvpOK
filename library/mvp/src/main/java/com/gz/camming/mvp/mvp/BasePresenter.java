@@ -41,14 +41,13 @@ public class BasePresenter<V> implements BaseMvp.BaseMvpPresenter<V>{
 
     private RxjavaCallback mRxjavaCallback;
 
-    private Observable mObservable;
+//    private Observable mObservable;
     /**
      * 绑定view，一般在初始化中调用该方法
      */
     @Override
     public void attachView(V mvpView) {
         this.mvpView = mvpView;
-
     }
     /**
      * 断开view，一般在onDestroy中调用
@@ -57,6 +56,13 @@ public class BasePresenter<V> implements BaseMvp.BaseMvpPresenter<V>{
     public void detachView() {
         this.mvpView = null;
         onUnSubscribe();
+    }
+    /**
+     * 是否绑定view
+     * */
+    @Override
+    public boolean isBingVeiw() {
+        return this.mvpView!=null;
     }
 
     /**
@@ -77,13 +83,13 @@ public class BasePresenter<V> implements BaseMvp.BaseMvpPresenter<V>{
     public void onUnSubscribe() {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.dispose();
+           // mCompositeDisposable.clear();
         }
     }
 
     //RxJava 开始注册
     //public void addSubscription(Observable observable, DisposableObserver observer) {
     public void requestDataSubscription(Observable observable, DisposableObserver observer) {
-        this.mObservable = observable;
         onSubscribe(observer);
         observable.subscribeOn(Schedulers.io())// 指定 subscribe() 发生在 IO 线程 I/O 操作（读写文件、数据库、网络请求等）  请求数据在IO线程
                 .observeOn(AndroidSchedulers.mainThread())//请求完成后再主线程更新UI  RxJava 扩展的 Android 主线程
@@ -96,7 +102,6 @@ public class BasePresenter<V> implements BaseMvp.BaseMvpPresenter<V>{
      * 解决实体类和字符串共存问题
      * */
     public void requestRxjavaDataObservable(Observable observable, RxjavaCallback callback) {
-        this.mObservable = observable;
         this.mRxjavaCallback = callback;
         onSubscribe(observer);
         observable.subscribeOn(Schedulers.io())// 指定 subscribe() 发生在 IO 线程 I/O 操作（读写文件、数据库、网络请求等）  请求数据在IO线程
@@ -104,15 +109,6 @@ public class BasePresenter<V> implements BaseMvp.BaseMvpPresenter<V>{
                 // .retry(1)//请求失败重连次数
                 .subscribeWith(observer);
     }
-
-    /**
-     * 取消订阅
-     * */
-//    public void cancleRequest(){
-//        if(this.mObservable!=null){
-//            mObservable.unsubscribeOn(Schedulers.io());
-//        }
-//    }
 
     /**
      * Rxjava 回调

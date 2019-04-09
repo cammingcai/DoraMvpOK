@@ -15,11 +15,11 @@ public interface BaseMvp {
      * */
     interface BaseMvpView {
         /**
-         * 显示正在加载进度框
+         * 显示加载进度框
          */
         void showLoading(String msg);
         /**
-         * 隐藏正在加载进度框
+         * 隐藏加载进度框
          */
         void hideLoading();
 
@@ -56,6 +56,10 @@ public interface BaseMvp {
          */
         void detachView();
 
+        /**
+         * 是否绑定view
+         * */
+        boolean isBingVeiw();
         /**
          * RXjava 开始注册
          *

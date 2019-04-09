@@ -71,6 +71,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 //                        path,name );
 //                mvpPresenter.downLoadFile("https://download.tfwangs.com/apk/DoraAI_1.0.30.apk",
 //                        path,"dora.apk");
+//                mvpPresenter.getNews("");
             }
         });
     }

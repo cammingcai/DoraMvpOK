@@ -32,7 +32,22 @@ public class SharedPreferenceUtil {
 		editor.putString(key, value);
 		editor.commit();
 	}
-
+	/**
+	 * 保存long
+	 *
+	 * @param context Context
+	 * @param key 键
+	 * @param value 值
+	 **/
+	public static void saveLong(final Context context, final String key,
+								  final long value) {
+		SharedPreferences preference = context.getSharedPreferences(
+				PREFERENCE_FILE_NAME, Context.MODE_PRIVATE);
+		Editor editor = preference.edit();
+		editor = preference.edit();
+		editor.putLong(key, value);
+		editor.commit();
+	}
 	/**
 	 * 保存int
 	 * @param context Context
@@ -76,7 +91,18 @@ public class SharedPreferenceUtil {
 				PREFERENCE_FILE_NAME, Context.MODE_PRIVATE);
 		return preference.getString(key, deau);
 	}
-
+	/**
+	 * 获取long
+	 * @param context
+	 * @param key
+	 * @param deau 默认值
+	 * @return
+	 */
+	public static long getLongValue(final Context context, final String key, final long deau) {
+		SharedPreferences preference = context.getSharedPreferences(
+				PREFERENCE_FILE_NAME, Context.MODE_PRIVATE);
+		return preference.getLong(key, deau);
+	}
 	/**
 	 * 获取Map
 	 * @param context
