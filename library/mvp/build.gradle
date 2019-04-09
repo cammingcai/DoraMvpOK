@@ -17,12 +17,13 @@ ext {
     logginginterceptor = '3.9.1'
     rxjavaVersion = '2.1.11'
     rxandroidVersion = "2.0.2"
-    appcompatVersion = "27.1.1"
+    appcompatVersion = "27.1.0"
     dialogVersion = "0.9.6.0"
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:$appcompatVersion"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
